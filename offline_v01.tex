@@ -719,7 +719,7 @@ Inhomogene Windgeschwindigkeits- und Sonneneinstrahlungs-Verteilung führen zu r
 
 \subsubsection{Systemdienstleistungen}
 \label{subsub_SysDien}
-ÜNB und Verteilnetzbetreiber sind verpflichtet, mithilfe von Regelungsmaßnahmen dauerhaft einen stabilen Betrieb des Stromnetzes zu gewährleisten. Die Stabilität des Netzes ergibt sich aus den Vorkehrungen, die für einen planbaren und planmäßigen sicheren Betrieb der Netze und gegen Spannungs- und Frequenzschwankungen ergriffen werden. Den Netzbetreibern stehen für die Stabilisierung der Netze eine Reihe von Systemdienstleistungen zur Verfügung, welche nachfolgend anhand ihrer Funktion eingeordnet werden können:\cite{Zapf.2017}
+ÜNB und Verteilnetzbetreiber sind verpflichtet, mithilfe von Regelungsmaßnahmen dauerhaft einen stabilen Betrieb des Stromnetzes zu gewährleisten. Die Stabilität des Netzes ergibt sich aus den Vorkehrungen, die für einen planbaren und planmäßigen sicheren Betrieb der Netze und gegen Spannungs- und Frequenzschwankungen ergriffen werden. Den Netzbetreibern stehen für die Stabilisierung der Netze eine Reihe von Systemdienstleistungen zur Verfügung, welche nachfolgend anhand ihrer Funktion eingeordnet werden können: \cite{Zapf.2017}
 
 \begin{itemize}
 	\item \textbf{Frequenzhaltung} erfolgt mittels konventioneller Kraftwerke, da regelbare Lasten notwendig sind. EEG-Anlagen können als Teil eines regelbaren Anlagenpools ebenfalls zur Frequenzhaltung genutzt werden. Die Frequenzhaltung erfolgt in diesem Falle über Wirkleistungsregelung.
@@ -2664,87 +2664,87 @@ Die Abbildung eines realistischen Betriebsverhaltens erfolgt mittels Berücksich
 
 
 
-%\section{Simulation}
-%
-%Festlegen des inneren Berechnungszeitraumes auf 10 Sekunden.???
-%
-%Im folgenden Abschnitt werden Validierung der elektrochemischen Modelle, Auswahl der Anlagengrößen für unterschiedliche Betriebsbereiche, entsprechende Parametrisierung sowie Simulationsablauf und Sensitivitätsanalyse beschrieben.
-%
-%\subsection{Parametrisierung Technologie-spezifisch}
-%\label{subs_Par_je_TEch}
-%Keine keine zeitlichen und infrastrukturellen Ressourcen für Experimente vorhanden.
-%In Ermangelung von Versuchsaufbauten zur Bestimmung von bzw. dem fehlenden Zugriff auf Laborwerten ist lediglich eine Parametrisierung mittels Literaturangaben möglich. Durch eine entsprechende Notwendigkeit, Werte verschiedener Quellen und damit unterschiedlicher Skalierung bzw. Mess-Bedingungen zu verwenden, wird die Aussagekraft vorliegender Ergebnisse eingeschränkt. Einzelne Teilmodelle können häufig nur qualitativ überprüft bzw. verifiziert werden.\\
-%Dennoch ist dadurch die Grundsätzliche Funktion des Modells nachweisbar. % % verschieben!!
-%
-%% % Espinoza-Lopez beschreibt PSO (S.167 unten links); dennoch sind experimente notwendig....
-%% % Goeßling -> Tab 1
-%
-%\begin{table}[]
-%	\label{tab-param}
-%	\caption{Tabelle verwendeter Parameter}
-%		\begin{tabular*}{\textwidth}{lllllccc}
-%			
-%		\multirow{ 2}{*}{ \textbf{Kategorie}} & \multirow{ 2}{*}{\textbf{Größe}} &\multirow{ 2}{*}{\textbf{Symbol}}&\multirow{ 2}{*}{\textbf{Einheit}}& \multicolumn{3}{c}{\textbf{Wert}}&\multirow{ 2}{*}{\textbf{Quelle}}\\
-%		&&&& AEL & PEM & SOEL&\\
-%		\hline \hline
-%		&&&&&&&\\
-%		&Membrandicke &$\delta_m$& &&&&\cite{Espinosa-Lopez2018}\\
-%		&Austauschstromdichte&$i_0$&& &&&\cite{Goesling2018}\\
-%		&&&&&&&\\
-%		Temp.&Wärmekapazität, Stack&$C_th$&$J/K$&&$162116$&&\cite{Espinosa-Lopez2018}\\
-%		&Wärmeübergangswiderstand&$k/W$&$0.0668$&$$&$$&$$&\cite{Espinosa-Lopez2018}\\
-%		&Pumpen-Wirkungsgrad&$\eta_{Pu}$&$$&$$&$$&$$&\\
-%		&&$$&$$&$$&$$&$$&\\
-%		&&$$&$$&$$&$$&$$&\\
-%		&&$$&$$&$$&$$&$$&\\
-%	\end{tabular*}
-%\end{table}
-%
-%\begin{table}[]
-%	\label{tab-param2}
-%	\caption{Tabelle verwendeter Parameter}
-%	\begin{tabular*}{\textwidth}{llllccccc}
-%		% \multirow{ 2}{*}{\textbf{Quelle}}
-%		%\multirow{ 2}{*}{ \textbf{Kategorie}} 
-%		 \multirow{ 2}{*}{\textbf{Größe}} &\multirow{ 2}{*}{\textbf{Symbol}}&\multirow{ 2}{*}{\textbf{Einheit}}& \multicolumn{3}{c}{\textbf{Wert}}&&&\\
-%		&&& AEL & Quelle&PEM &Quelle& SOEL&Quelle\\
-%		\hline \hline
-%		&&&&&&&&\\
-%		Membrandicke &$\delta_m$& &&\cite{Espinosa-Lopez2018}&&&&\\
-%		Austauschstromdichte&$i_0$&&&\cite{Goesling2018}&&&&\\
-%		&&&&&&&&\\
-%		Wärmekapazität, Stack&$C_th$&$J/K$&&$162116$&&\cite{Espinosa-Lopez2018}&&\\
-%		Wärmeübergangswiderstand&$k/W$&$0.0668$&$$&$$&$$&\cite{Espinosa-Lopez2018}&&\\
-%		Pumpen-Wirkungsgrad&$\eta_{Pu}$&$$&$$&$$&$$&&&\\
-%		
-%		&$$&$$&$$&$$&$$&&&\\
-%		&$$&$$&$$&$$&$$&&&\\
-%		&$$&$$&$$&$$&$$&&&\\
-%	\end{tabular*}
-%\end{table}
-%
-%\subsection{Anlagenskalierung}
-%\label{subs_Skal_TEch}
-%
-%\subsubsection{Anlagen Parameter}
-%
-%\begin{table}[]
-%	\begin{tabular}{cllll}
-%		&&AEL&PEM&SOEL\\
-%		Betriebsart &Größe& &&\\
-%		\hline \hline
-%		\multirow{ 4}{*}{ \textbf{EIS}}&&&&\\
-%		&hallo&&&\\
-%		&hallo&&&\\
-%		\multirow{ 4}{*}{ \textbf{RES}}&&&&\\
-%		\multirow{ 4}{*}{ \textbf{WEA}}&&&&\\
-%		\multirow{ 12}{*}{ \textbf{COST}}&&&&\\
-%		&\multirow{ 4}{*}{ \textbf{s}}&&&\\
-%		&&&&\\
-%		&\multirow{ 4}{*}{ \textbf{m}}&&&\\
-%		&\multirow{ 4}{*}{ \textbf{m}}&&&\\
-%	\end{tabular}
-%\end{table}
+\section{Simulation}
+
+Festlegen des inneren Berechnungszeitraumes auf 10 Sekunden.???
+
+Im folgenden Abschnitt werden Validierung der elektrochemischen Modelle, Auswahl der Anlagengrößen für unterschiedliche Betriebsbereiche, entsprechende Parametrisierung sowie Simulationsablauf und Sensitivitätsanalyse beschrieben.
+
+\subsection{Parametrisierung Technologie-spezifisch}
+\label{subs_Par_je_TEch}
+Keine keine zeitlichen und infrastrukturellen Ressourcen für Experimente vorhanden.
+In Ermangelung von Versuchsaufbauten zur Bestimmung von bzw. dem fehlenden Zugriff auf Laborwerten ist lediglich eine Parametrisierung mittels Literaturangaben möglich. Durch eine entsprechende Notwendigkeit, Werte verschiedener Quellen und damit unterschiedlicher Skalierung bzw. Mess-Bedingungen zu verwenden, wird die Aussagekraft vorliegender Ergebnisse eingeschränkt. Einzelne Teilmodelle können häufig nur qualitativ überprüft bzw. verifiziert werden.\\
+Dennoch ist dadurch die Grundsätzliche Funktion des Modells nachweisbar. % % verschieben!!
+
+% % Espinoza-Lopez beschreibt PSO (S.167 unten links); dennoch sind experimente notwendig....
+% % Goeßling -> Tab 1
+
+\begin{table}[]
+	\label{tab-param}
+	\caption{Tabelle verwendeter Parameter}
+		\begin{tabular*}{\textwidth}{lllllccc}
+			
+		\multirow{ 2}{*}{ \textbf{Kategorie}} & \multirow{ 2}{*}{\textbf{Größe}} &\multirow{ 2}{*}{\textbf{Symbol}}&\multirow{ 2}{*}{\textbf{Einheit}}& \multicolumn{3}{c}{\textbf{Wert}}&\multirow{ 2}{*}{\textbf{Quelle}}\\
+		&&&& AEL & PEM & SOEL&\\
+		\hline \hline
+		&&&&&&&\\
+		&Membrandicke &$\delta_m$& &&&&\cite{Espinosa-Lopez2018}\\
+		&Austauschstromdichte&$i_0$&& &&&\cite{Goesling2018}\\
+		&&&&&&&\\
+		Temp.&Wärmekapazität, Stack&$C_th$&$J/K$&&$162116$&&\cite{Espinosa-Lopez2018}\\
+		&Wärmeübergangswiderstand&$k/W$&$0.0668$&$$&$$&$$&\cite{Espinosa-Lopez2018}\\
+		&Pumpen-Wirkungsgrad&$\eta_{Pu}$&$$&$$&$$&$$&\\
+		&&$$&$$&$$&$$&$$&\\
+		&&$$&$$&$$&$$&$$&\\
+		&&$$&$$&$$&$$&$$&\\
+	\end{tabular*}
+\end{table}
+
+\begin{table}[]
+	\label{tab-param2}
+	\caption{Tabelle verwendeter Parameter}
+	\begin{tabular*}{\textwidth}{llllccccc}
+		% \multirow{ 2}{*}{\textbf{Quelle}}
+		%\multirow{ 2}{*}{ \textbf{Kategorie}} 
+		 \multirow{ 2}{*}{\textbf{Größe}} &\multirow{ 2}{*}{\textbf{Symbol}}&\multirow{ 2}{*}{\textbf{Einheit}}& \multicolumn{3}{c}{\textbf{Wert}}&&&\\
+		&&& AEL & Quelle&PEM &Quelle& SOEL&Quelle\\
+		\hline \hline
+		&&&&&&&&\\
+		Membrandicke &$\delta_m$& &&\cite{Espinosa-Lopez2018}&&&&\\
+		Austauschstromdichte&$i_0$&&&\cite{Goesling2018}&&&&\\
+		&&&&&&&&\\
+		Wärmekapazität, Stack&$C_th$&$J/K$&&$162116$&&\cite{Espinosa-Lopez2018}&&\\
+		Wärmeübergangswiderstand&$k/W$&$0.0668$&$$&$$&$$&\cite{Espinosa-Lopez2018}&&\\
+		Pumpen-Wirkungsgrad&$\eta_{Pu}$&$$&$$&$$&$$&&&\\
+		
+		&$$&$$&$$&$$&$$&&&\\
+		&$$&$$&$$&$$&$$&&&\\
+		&$$&$$&$$&$$&$$&&&\\
+	\end{tabular*}
+\end{table}
+
+\subsection{Anlagenskalierung}
+\label{subs_Skal_TEch}
+
+\subsubsection{Anlagen Parameter}
+
+\begin{table}[]
+	\begin{tabular}{cllll}
+		&&AEL&PEM&SOEL\\
+		Betriebsart &Größe& &&\\
+		\hline \hline
+		\multirow{ 4}{*}{ \textbf{EIS}}&&&&\\
+		&hallo&&&\\
+		&hallo&&&\\
+		\multirow{ 4}{*}{ \textbf{RES}}&&&&\\
+		\multirow{ 4}{*}{ \textbf{WEA}}&&&&\\
+		\multirow{ 12}{*}{ \textbf{COST}}&&&&\\
+		&\multirow{ 4}{*}{ \textbf{s}}&&&\\
+		&&&&\\
+		&\multirow{ 4}{*}{ \textbf{m}}&&&\\
+		&\multirow{ 4}{*}{ \textbf{m}}&&&\\
+	\end{tabular}
+\end{table}
 
 \subsection{Funktionstest und Abgleich der Einzelkomponenten}
 \subsubsection{Elektrochemie}
