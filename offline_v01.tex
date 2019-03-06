@@ -576,7 +576,7 @@ type=symbolslist}
 	\centering
 	%\includegraphics[width=0.15\textwidth]{example-image-1x1}\par\vspace{1cm}
 	
-	{\includegraphics[height = 12mm]{Logo_uni_Bild1.png}\par}
+	{\includegraphics[height = 12mm]{Abb/Logos/Logo_uni_Bild1.png}\par}
 	\vspace{1cm}
 	{\scshape\Large Universität Bremen \par}
 	\vspace{1cm}
@@ -597,9 +597,9 @@ type=symbolslist}
 	Prof. Dr. Ing. ~J. \textsc{Thöming}\\
 
     \vfill
-   	\includegraphics[height = 20mm]{RES_EN_logo_de_rot_mittel.png}
+   	\includegraphics[height = 20mm]{Abb/Logos/RES_EN_logo_de_rot_mittel.png}
 	\hfill	
-	\includegraphics[height = 20mm]{logo_fb4_Bild2.png}%
+	\includegraphics[height = 20mm]{Abb/Logos/logo_fb4_Bild2.png}%
 	%\vfill
 
 % Bottom of the page
@@ -2670,14 +2670,29 @@ Festlegen des inneren Berechnungszeitraumes auf 10 Sekunden.???
 
 Im folgenden Abschnitt werden Validierung der elektrochemischen Modelle, Auswahl der Anlagengrößen für unterschiedliche Betriebsbereiche, entsprechende Parametrisierung sowie Simulationsablauf und Sensitivitätsanalyse beschrieben.
 
-\subsection{Parametrisierung Technologie-spezifisch}
+\subsection{Technologiespezifische Parametrierung für Basis-Anlagengröße}
 \label{subs_Par_je_TEch}
-Keine keine zeitlichen und infrastrukturellen Ressourcen für Experimente vorhanden.
+
+
+%Keine zeitlichen und infrastrukturellen Ressourcen für Experimente vorhanden.
 In Ermangelung von Versuchsaufbauten zur Bestimmung von bzw. dem fehlenden Zugriff auf Laborwerten ist lediglich eine Parametrisierung mittels Literaturangaben möglich. Durch eine entsprechende Notwendigkeit, Werte verschiedener Quellen und damit unterschiedlicher Skalierung bzw. Mess-Bedingungen zu verwenden, wird die Aussagekraft vorliegender Ergebnisse eingeschränkt. Einzelne Teilmodelle können häufig nur qualitativ überprüft bzw. verifiziert werden.\\
 Dennoch ist dadurch die Grundsätzliche Funktion des Modells nachweisbar. % % verschieben!!
 
+\subsection{Paramter des Temperaturmodells}
+\label{sub_params_tempmodell}
+Für die Stabilität des thermischen Modells sind Wärmekapazität der Anlage $C_t$, Wärmeübergangskoeffizient $H_{AX} ~=~k \cdot A $?????????????? sowie zu- und abgeführte Wassermengen entscheidend.
+Letzteres betreffend werden innerhalb der \gls{nt}-\gls{el} entsprechende Kühlwasserströme mit einem Sicherheitsfaktor versehen, auf den durch Überspannungen maximal hervorgerufenen Wärmeeintrag angepasst und innerhalb der PID-Implementierung geregelt. Die für das Charakteristische Anlagenverhalten in Abhängigkeit einer Temperaturänderung relevanten Parameter $C_t$ und $H_{Ax}$ sind so zu wählen, dass sinnvolle Skalierungseffekte auftreten.\\
+Das verwendete Modell zusammengefasster Wärmekapazitäten beinhaltet lediglich einen übergeordneten Wert für die Wärmekapazität eines gesamten Stacks.\cite{glgs} Hieraus entsteht die Schwierigkeit, Zell- und (dem gegenüber) Stack-spezifische Veränderungen der thermischen Systemeigenschaften für unterschiedliche Anlagengrößen zu beziffern.\\
+Ein Lösungsansatz besteht darin, aus diversen Literaturwerten einen charakteristischen Zusammenhang von Wärmekapazität und Stack- bzw. Anlagenleistung abzuleiten und mit entsprechendem funktionalen Zusammenhang weiter Werte zu bestimmen. In Ermangelung einer ausreichenden Zahl verschiedener Zahlenwerte kann allerdings dieser Ansatz nicht sinnvoll umgesetzt werden.\\
+Aus diesem Grund können für weitere Betrachtungen lediglich entsprechende Zusammenhänge aus Literaturangaben linear extrapoliert werden.???????
+Um die Höhe des Fehlers einzugrenzen, werden Werte für Zellanzahl je Stack $N$ und Zellfläche $A_cell$ sowie Wärmekapazität $C_t$ und Wärmeübergangskoeffizient $H_Ax$ nach Möglichkeit aus derselben???? Quelle verwendet.\\
+ 
+Instabiles Verhalten der Temperaturregelung macht es jedoch erforderlich, den Wert des Wärmeübergangskoeffizienten mit Faktor ($2,5$) zu korrigieren.  Mittels überschlägiger Rechnung kann überprüft werden, dass trotz dieser Annahme entsprechende Werte in einem plausiblen bzw. technisch möglichen Bereich liegen.?????????  
 % % Espinoza-Lopez beschreibt PSO (S.167 unten links); dennoch sind experimente notwendig....
 % % Goeßling -> Tab 1
+Auswahl von Fläche, etc. begründen
+\subsubsection*{Auswahl Basis-Paramter, PEM}
+Für das Basis Modell der \gls{pem}-\gls{el} werden Parameter zu Zellfläche und Zellenzahl je Stack sowie Wärmekapazität und 
 
 \begin{table}[]
 	\label{tab-param}
@@ -3099,6 +3114,7 @@ In Abbildung(\ref{fig:plt_se_COST_PEM}) ist exemplarisch die Simulation eines Be
 \end{figure}
 Innerhalb der dargestellten Berechnung ist das Strompreis-Limit auf $40~ EUR/MWh$ festgelegt. Zu erkennen ist, dass insbesondere in den Sommermonaten liegen große Zeiträume vor, in denen der festgelegte Wert unterschritten wird.\\
 Auch für diesen Betriebsfall besteht grundsätzlich Plausibilität der Ergebnisse. Die Temperaturregelung scheint relativ genau zu agieren: Die Stacktemperatur liegt durchgehend innerhalb sinnvoller bzw. zulässiger Bereiche.\\
+Zu erkennen ist, dass der Gesamt-Leistungsbezug der Anlage \gls{P_act} über der maximalen Stackleistung liegt. Dies ist insofern sinnvoll, da für diese Betriebsart der maximal Leistungsbezug nicht durch eine verfügbare Leistung, sondern durch die maximale Stackleistung \gls{P_st} begrenzt wird. ?????????????????????????????
 Auf Grund der Signalcharakteristik wird die Anlage lediglich zwischen Stillstand und Nennleistung bewegt, wodurch für sämtliche weiteren dargestellten Größen wenig Aussagekraft innerhalb dieser Darstellung existiert. Gut erkennbar ist dagegen das Niveau der Wasserstoff- und Sauerstoff-Produktion sowie das Niveau der Produktgaskontamination. Auch diese Werte liegen in erwarteten Bereichen.\\
 \subsubsection{Bewertung der Simulation}
 %???HIER?
@@ -3575,6 +3591,13 @@ Aus dem \gls{cost}-Sigal wird deutlich das die Skalierung bei einem Signal mit h
 %- demibras (Hiwi/H2-Distr/sonstige) -> Tab 4, ff
 %
 %\subsection{Sauerstoff-Vertriebsmöglichkeiten}
+\section{Ökonomie(???)}
+\subsection{Vetriebswege}
+Statista: Wasserstoffbedarf 2050
+\url{https://de.statista.com/statistik/daten/studie/750972/umfrage/prognose-wasserstoffbedarf-in-deutschland/}
+tankstellen:
+\url{https://ecomento.de/2018/02/16/wasserstoff-elektroauto-tankstellen-2017-deutschland-europa-welt/}
+\url{https://ecomento.de/2019/02/18/deutschland-jetzt-mit-60-wasserstoff-tankstellen/}
 
 \section{Bewertung}
 Das angestrebte Modell zur Abbildung relevanter Betriebscharakteristiken verschiedener Elektrolyse-Typen konnte innerhalb des Bearbeitungszeitraums erstellt und erfolgreich getestet werden. Im Folgenden soll nun eine Bewertung der innerhalb der vorliegenden Arbeit erzielten Ergebnisse erfolgen. 
@@ -3696,56 +3719,56 @@ Unter Berücksichtigungen von Abweichungen und Vereinfachungen innerhalb der Mod
 		
 		\textbf{Anlagenspezifische Kennwerte}&&&&&&&& \\
 		Betriebsdruck 							& $p$ 					& $bar$ 			& 1,013		& 	 		& 1,013 				& 	 		& 1,013					& 	 		\\
-		Betriebstemperatur						& $T_{tar}$				& $\degree{C}$ 		& 77 		& Tjakrs	& 60 					& Hammoudi	& 850 					& Ni 		\\[2ex]
-		maximale Temperatur						& $T_{max}$				& $\degree{C}$ 		& 85 		& Tjakrs	& 80 					& Hammoudi	& 1050 					& Ni 		\\
-		minimale Temperatur						& $T_{min}$				& $\degree{C}$ 		& 20 		& Tjakrs	& 20 					& Hammoudi	& 700 					& Ni 		\\
-		maximale Stromdichte 					& $i_{max}$ 			& $A/{cm^2}$ 		& 3.0 		& Tjakrs	& 0.3 					& Hammoudi	& 0.8 					& Petipas 	\\
-		Zellen pro Stack						& $N_{ce_{st}}$			& -				 	& 200		& Gabr		& 24					& Hammoudi 	& 400 					& Petipas 	\\
-		spez. Wärmekapazität					& $C_{t_{spec}}$		& $kJ/KN_{ce}$ 		& 1.2500	& Gabr		& 4.8906 				& Ulle		& 0,0969				& Petipas 	\\
+		Betriebstemperatur						& $T_{tar}$				& $\degree{C}$ 		& 77 		& \cite{Tjarks.2017}	& 60 					& Hammoudi	& 850 					& Ni 		\\[2ex]
+		maximale Temperatur						& $T_{max}$				& $\degree{C}$ 		& 85 		& \cite{Tjarks.2017}	& 80 					& Hammoudi	& 1050 					& Ni 		\\
+		minimale Temperatur						& $T_{min}$				& $\degree{C}$ 		& 20 		& \cite{Tjarks.2017}	& 20 					& Hammoudi	& 700 					& Ni 		\\
+		maximale Stromdichte 					& $i_{max}$ 			& $A/{cm^2}$ 		& 3.0 		& \cite{Tjarks.2017}	& 0.3 					& Hammoudi	& 0.8 					& Petipas 	\\
+		Zellen pro Stack						& $N_{ce_{st}}$			& -				 	& 200		& \cite{Tjarks.2017}		& 24					& Hammoudi 	& 400 					& Petipas 	\\
+		spez. Wärmekapazität					& $C_{t_{spec}}$		& $kJ/KN_{ce}$ 		& 1.2500	& \cite{Tjarks.2017}		& 4.8906 				& \cite{Ulleberg.2003}		& 0,0969				& Petipas 	\\
 		spez. Wärmedurchgangskoeffizient		& $H_{AX_{spec}}$		& $W/Kcm^{2}N_{ce}$				& 0.028		& Gabr					& 0,011 	& Gabr		& ??? 		& - 		\\
-		spez. Wärmedurchgangswiderstand			& $R_{t_{spec}}$		& $K/W$				& 0,167 	& Ulle		& 0,167					& Ulle		& 0,840					& Petipas 	\\
-		Kühlwassereingangstemperatur			& $T_{cw_{in}}$			& $\degree{C}$ 		& 15 		& Ulle		& 15 					& Ulle		& 	 					& 	 		\\	
-		Degradationsgradient 					& $deg$ 				& ${\mu}V/h$		& 4-8 		& Buttler	& 1-2 					& Buttler	& 21 					& De-Niang 	\\
+		spez. Wärmedurchgangswiderstand			& $R_{t_{spec}}$		& $K/W$				& 0,167 	& \cite{Ulleberg.2003}		& 0,167					& \cite{Ulleberg.2003}		& 0,840					& Petipas 	\\
+		Kühlwassereingangstemperatur			& $T_{cw_{in}}$			& $\degree{C}$ 		& 15 		& \cite{Ulleberg.2003}		& 15 					& \cite{Ulleberg.2003}		& 	 					& 	 		\\	
+		Degradationsgradient 					& $deg$ 				& ${\mu}V/h$		& 4-8 		& \cite{Buttler.2018}	& 1-2 					& Buttler	& 21 					& De-Niang 	\\
 		
 		&&&&&&&& \\
 		\textbf{Anoden-Kennwerte}&&&&&&&& \\
 		Elektrodenmaterial 						& - 					& -					& - 		& -	 		& - 					& Hammoudi	& - 					& -			\\
-		Elektrodenoberfläche 					& $A_{an}$				& $cm^{2}$			& 170 		& Gabriel	& 300					& Hammoudi 	& 100 					& Petipas 	\\
-		Elektrodendurchmesser 					& $\delta_{an}$			& $cm$ 				& 0,14 		& Chande 	& 0,2 					& Hammoudi	& 0,05 					& Zhang 	\\
+		Elektrodenoberfläche 					& $A_{an}$				& $cm^{2}$			& 170 		& \cite{Gabrielli2016}	& 300					& Hammoudi 	& 100 					& Petipas 	\\
+		Elektrodendurchmesser 					& $\delta_{an}$			& $cm$ 				& 0,14 		& \cite{Chandesris2015} 	& 0,2 					& Hammoudi	& 0,05 					& Zhang 	\\
 		Seperatordistanz 						& $l_{an}$ 				& $cm$ 				& 	 		& 	 		& 0,125 				& Hammoudi	& 	 					& 			\\
 		
 		Tortuosität 							& $\tau_{an}$			& - 				& 	 		& 	 		& 3,65 					& Abdin		& 6 					& Zhang 	\\
 		Porosität 								& $\epsilon_{an}$		& - 				& 	 		& 	 		& 0,30 					& Abdin		& 0,3 					& Zhang 	\\
 		Porenradius (Knudsen-Diff.) 			& $r_{P_{an}}$ 			& $cm$ 				& 	 		& 	 		& $1\times{10^{-4}}$	& Abdin		& $0,5\times{10^{-4}}$ 	& Zhang 	\\
-		Rugosität 								& $rug_{an}$			& $m^{2}/m^{2}$		& 150 		& Chande	& 	 					& 			& 	 					& 	 		\\
+		Rugosität 								& $rug_{an}$			& $m^{2}/m^{2}$		& 150 		& \cite{Chandesris2015}	& 	 					& 			& 	 					& 	 		\\
 		Elektrodenrauheit 						& $\gamma_{an}$ 		& -	 				& 	 		& 	 		& 1,25 					& Abdin		&  						& 	 		\\
 		
-		Ladungstransferkoeffizient 				& $\alpha_{an}$ 		& - 				& 0,65 		& Chande	& 1,65 					& Abdin		& 	 					& 	 		\\
-		Freie Aktivierungsenergie 				& ${\Delta}G_{c_{an}}$	& $J/mol$ 			& 62836		& Chande	& 80510 				& Abdin		& 120000 				& Zhang 	\\
+		Ladungstransferkoeffizient 				& $\alpha_{an}$ 		& - 				& 0,65 		& \cite{Chandesris2015}	& 1,65 					& Abdin		& 	 					& 	 		\\
+		Freie Aktivierungsenergie 				& ${\Delta}G_{c_{an}}$	& $J/mol$ 			& 62836		& \cite{Chandesris2015}	& 80510 				& Abdin		& 120000 				& Zhang 	\\
 		Referenzaustauschstromdichte			& $i_{0ref_{an}}$		& $A/cm^{2}$ 		& 	 		& 	 		& $1\times{10^{-11}}$ 	& Abdin		& 	 					& 	 		\\
 		Referenztemperatur $i_{0ref_{an}}$ 		& $T_{ref_{an}}$ 		& $\degree{C}$	 	& 	 		& 	 		& 90 					& Abdin		& 	 					& 	 		\\	
 		Anodic rate parameter					& $k_{0_{an}}$			& $mol/Ksm^{2}$		& $4,63\times{10^{-3}}$ & Chande 				&& 	 		& 	 					& 	 		\\
-		Elektrodenleitfähigkeit					& $\sigma_{an}$ 		& $S/m$				& 13700	 	& Chande 	& 						& 	 		& 	 					& 	 		\\
+		Elektrodenleitfähigkeit					& $\sigma_{an}$ 		& $S/m$				& 13700	 	& \cite{Chandesris2015} 	& 						& 	 		& 	 					& 	 		\\
 		
 		&&&&&&&& \\
 		\textbf{Kathoden-Kennwerte}&&&&&&&& \\
 		Elektrodenmaterial 						& - 					& - 				& - 		& - 		& -		 				& Hammoudi 	& - 					& - 		\\
-		Elektrodenoberfläche 					& $A_{ca}$ 				& $cm^{2}$ 			& 170 		& Gabriel	& 300 					& Hammoudi 	& 100 					& Petipas	\\
-		Elektrodendurchmesser 					& $\delta_{ca}$ 		& $cm$ 				& 0,235		& Chande	& 0,2 					& Hammoudi 	& 0,5 					& Zhang 	\\
+		Elektrodenoberfläche 					& $A_{ca}$ 				& $cm^{2}$ 			& 170 		& \cite{Gabrielli2016}	& 300 					& Hammoudi 	& 100 					& Petipas	\\
+		Elektrodendurchmesser 					& $\delta_{ca}$ 		& $cm$ 				& 0,235		& \cite{Chandesris2015}	& 0,2 					& Hammoudi 	& 0,5 					& Zhang 	\\
 		Seperatordistanz 						& $l_{ca}$ 				& $cm$ 				& 	 		& 	 		& 0,125 				& Hammoudi 	& 	 					& 	 		\\
 		
 		Tortuosität 							& $\tau_{ca}$	 		& -	 				& 	 		& 			& 3,65 					& Abdin 	& 6 					& Zhang 	\\
 		Porosität 								& $\epsilon_{ca}$		& -	 				& 	 		& 			& 0,30 					& Abdin 	& 0,3 					& Zhang 	\\
 		Porenradius (Knudsen-Diff.) 			& $r_{P_{ca}}$			& $cm$ 				& 	 		& 	 		& $1\times{10^{-4}}$	& Abdin 	& $0,5\times{10^{-4}}$ 	& Zhang 	\\
-		Rugosität 								& $rug_{ca}$			& $m^{2}/m^{2}$		& 150 		& Chande	& 	 					& 		 	& 	 					&	 		\\
+		Rugosität 								& $rug_{ca}$			& $m^{2}/m^{2}$		& 150 		& \cite{Chandesris2015}	& 	 					& 		 	& 	 					&	 		\\
 		Elektrodenrauheit 						& $\gamma_{ca}$ 		& 	 				& 	 		& 	 		& 1,05 					& Abdin 	& 	 					& 	 		\\
 		
-		Ladungstransferkoeffizient 				& $\alpha_{ca}$ 		& - 				& 0,51 		& Chande	& 0,73 					& Abdin 	& 	 					& 	 		\\
-		Freie Aktivierungsenergie 				& ${\Delta}G_{c_{ca}}$ 	& $J/mol$		    & 24359		& Chande	& 80510 				& Abdin 	& 100000 				& Zhang 	\\
+		Ladungstransferkoeffizient 				& $\alpha_{ca}$ 		& - 				& 0,51 		& \cite{Chandesris2015}	& 0,73 					& Abdin 	& 	 					& 	 		\\
+		Freie Aktivierungsenergie 				& ${\Delta}G_{c_{ca}}$ 	& $J/mol$		    & 24359		& \cite{Chandesris2015}	& 80510 				& Abdin 	& 100000 				& Zhang 	\\
 		Referenzaustauschstromdichte			& $i_{0ref_{ca}}$ 		& $A/cm^{2}$		& 	 		& 	 		& $1\times{10^{-3}}$ 	& Abdin 	& 	 					& 	 		\\
 		Referenztemperatur $i_{0ref_{ca}}$ 		& $T_{ref_{ca}}$ 		& $\degree{C}$	 	& 	 		& 	 		& 90 					& Abdin 	& 	 					& 	 		\\
 		Cathodic rate parameter					& $k_{0_{ca}}$			& $mol/Ksm^{2}$		& $1,10\times{10^{-3}}$ & Chande 				&&			& 						& 	 		\\
-		Elektrodenleitfähigkeit					& $\sigma_{ca}$ 		& $S/m$				& 46	 	& Chande	& 	 					&  			& 	 					& 	 		\\
+		Elektrodenleitfähigkeit					& $\sigma_{ca}$ 		& $S/m$				& 46	 	& \cite{Chandesris2015}	& 	 					&  			& 	 					& 	 		\\
 		
 		&&&&&&&& \\
 		\textbf{Diaphragma-Kennwerte}&&&&&&&& \\
@@ -3758,9 +3781,9 @@ Unter Berücksichtigungen von Abweichungen und Vereinfachungen innerhalb der Mod
 		
 		&&&&&&&& \\
 		\textbf{Elektrolyt-Kennwerte}&&&&&&&& \\
-		Durchmesser								& $\delta_{mem}$		& $\mu{m}$			& 200		& Gabriel	&			&			& 500   & Zhang \\			
-		Membranfeuchtigkeit						& $\lambda_{mem}$		& -					& 16  		& Chande	& 			& 			& 		& 		\\
-		Membranwiderstand						& $R_{mem}$ 			& $\Omega$			& 0.096		& Tjarks	& 	 		& 			& 	 	& 		\\
+		Durchmesser								& $\delta_{mem}$		& $\mu{m}$			& 200		& \cite{Gabrielli2016}	&			&			& 500   & Zhang \\			
+		Membranfeuchtigkeit						& $\lambda_{mem}$		& -					& 16  		& \cite{Chandesris2015}	& 			& 			& 		& 		\\
+		Membranwiderstand						& $R_{mem}$ 			& $\Omega$			& 0.096		& \cite{Tjarks.2017}	& 	 		& 			& 	 	& 		\\
 		Diff. Permeabilität $O_{2}$				& $\epsilon_{O_{2}}$	& $mol/cmsbar$		& $2,00\times{10^{-11}}$	& Schalenbach			&			&						&	 \\
 		Diff. Permeabilität $H_{2}$				& $\epsilon_{H_{2}}$	& $mol/cmsbar$		& $4,65\times{10^{-11}}$	& Schalenbach			&			&						&	 \\
 		
