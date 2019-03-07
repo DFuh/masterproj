@@ -1,7 +1,11 @@
 \documentclass[onecolumn,10pt,titlepage]{article}
 \usepackage[a4paper,top=2.5cm,bottom=2cm,left=3cm,right=2cm,marginparwidth=1.75cm,headheight=28pt]{geometry}
 
+%\usepackage[official]{eurosym}
+\usepackage{eurosym}
 \usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{20AC}{\euro}
+
 \usepackage[ngerman]{babel} 
 \usepackage[onehalfspacing]{setspace}
 
@@ -11,7 +15,7 @@
 \usepackage{mathastext}
 \usepackage{siunitx}
 
-\usepackage[official]{eurosym}
+
 %BORRAR O DEJAR: Cambia estilo de la fuente matemática y la deja con aspecto mas "técnico".
 \usepackage{graphicx}
 \usepackage{amssymb}
@@ -613,6 +617,9 @@ type=symbolslist}
 testetetete
 naja...ob das was nützt?
 ich änder hier jetzt was
+$\mbox{\euro}$
+$\text{\euro}$
+
 {\textbf{Abstract}}\par
 % Un resumen del problema a tratar debería tener menos de 200 palabras y no incluir referencias. Un resumen del problema a tratar debería tener menos de 200 palabras y no incluir referencias. Un resumen del problema a tratar debería tener menos de 200 palabras y no incluir referencias. Un resumen del problema a tratar debería tener menos de 200 palabras y no incluir referencias. Un resumen del problema a tratar debería tener menos de 200 palabras y no incluir referencias.
 
@@ -1063,7 +1070,7 @@ Die reversible Zellspannung stellt eine charakteristische Kennzahl der Elektroly
 			
 			Um die Zelleffizienz für einen bestimmten Betriebspunkt zu erhöhen muss die Zellspannung bei gleichbleibender Stromdichte reduziert werden, zum Beispiel durch erhöhen der Temperatur oder absenken des Drucks.
 			
-			\subsubsection{Kenndaten der Elektrolyse}
+			\subsubsection{Kenngrößen der Elektrolyse}
 			\label{subsubb_Kenndaten}
 			Um eine Vergleichbarkeit von den verschiedenen Elektrolyseuren herstellen zu können, werden folgende Kenndaten genutzt:
 			
@@ -1897,22 +1904,73 @@ Abbildung (\ref{fig:COST_roh_betrART}) bildet die Strompreiszeitreihe in 60-min�
 \section{Bewertungskriterien}
 \label{Bewertungs-Krit}
 
-Die Simulationen der vier Betriebsarten \gls{eis}, \gls{res}, \gls{wea} und \gls{cost}  liefern Kennwerte, anhand derer die Elektrolyseur-Anlagentypen \gls{ael}, \gls{pem}-\gls{el}, und \gls{soel} 
-hinsichtlich ihrer Eignung für den jeweiligen Betrieb bewertet werden können.
-
-\subsection{ Systemdienliches Verhalten}%Systemdienstleistung}
-
-Wie aus \ref{sub_GrundET} hervorgeht, sind Elektrolyseur-Anlagen, wie in diesem Modell dargestellt, lediglich in der Lage  Systemdienleistung zu erbringen, indem sie das Netz durch Energieverbrauch entlasten. Die  Ausnutzungsrate $\eta_{util}$ beschreibt das Verhältnis der verrichteteten Arbeit der Elektrolyse-Anlage $W_{act}$ zur gesamten zur Verfügung stehenden elektrische Arbeit $W_{in}$.
-Bei einem Verhältnis von 1 wäre die Anlage in der Lage,
+Zur Bewertung des Betriebsverhaltens der betrachteten \gls{el}-Technologien in Hinblick auf im vorangestellten Abschnitt(\ref{sect_Betriebsarten}) erläuterte Betriebsarten bzw. -situationen sind verschiedene Kriterien denk- und anwendbar.\\
+Um das jeweilige Betriebsverhalten im Einzelnen bewerten und ggf.(?????????????????) eine besondere Eignung einzelner Technologien herausstellen zu können, werden die in Abschnitt(\ref{subsubb_Kenndaten}) erläuterten Kenngrößen 
 \begin{itemize}
-\item die gesamte aufgrund von Einspeisemanagement-Maßnahmen (\gls{eis}) geregelte Last vom Netz zu nehmen, Netzengpässe ideal zu verhindern und zudem die ungenutzte Erzeugung zu nutzen,
-\item die gesamte negative Residuallast (\gls{res}) zu nutzen und im Sinne der Systemdienlichkeit das Netz ideal zu stabilisieren.
+	\item Menge Produktgas
+	\item Systemwirkungsgrad
+	\item Spezifischer Energiebedarf
+	\item Nutzungsgrad verfügbarer Energie
+	\item Wasserstoffgestehungskosten (?????????)
 \end{itemize}
-Je höher $\eta_{util}$ ausfällt, desto mehr Arbeit konnte die \gls{el}-Anlage verrichten und umso netzdienlicher ist der Anlagenbetrieb.
+
+genutzt. Deren Abgleich erfolgt, wie nachfolgend erläutert, in unterschiedlicher Kombination für folgende Bewertungskriterien:
+\begin{itemize}
+	\item Effizienz
+	\item Effektivität
+	\item Systemdienlichkeit
+	\item Ökonomie
+\end{itemize} 
+
+Für unterschiedliche Betriebsarten ist dabei ggf. eine verschieden starke Gewichtung einzelner Kriterien vorzunehmen.\\
+ 
+%Die Simulationen der vier Betriebsarten \gls{eis}, \gls{res}, \gls{wea} und \gls{cost}  liefern Kennwerte, anhand derer die Elektrolyseur-Anlagentypen \gls{ael}, \gls{pem}-\gls{el}, und \gls{soel} 
+%hinsichtlich ihrer Eignung für den jeweiligen Betrieb bewertet werden können.
+\subsection{Plausibilität des modellierten Verhaltens}
+\label{sub_bewkrit_Plausibilitaet}
+
+Um das innerhalb der Simulation gezeigte Betriebsverhalten auf Plausibilität zu prüfen, eignet sich der Abgleich errechneter Kenngrößen mit Literaturwerten. Dazu werden Systemwirkungsgrad \gls{eta_sys} und der spezifische Energiebedarf ????????????? herangezogen.\\  
+Zusätzlich sind weitere qualitative Betrachtungen erstellter Zeitreihen und diesbezüglicher Abgleich von Betriebstemperatur \gls{T_stack}, Wertebereichen von Zellspannung \gls{u_cell} und Stromdichte \gls{i} sowie Leistungsbereiche $P_j$ und Produktgasströme einzubeziehen.
 
 \subsection{Effizienz}
-Die Systemeffizienz $\eta_sys$ setzt die Energie des produzierten Wasserstoffs in Relation zur der Elektrolyse-Anlage zugeführten elektrischen Arbeit. Somit beschreibt der Kennwert die Effizienz der Elektrolyse-Anlage. %, aus elektrischer Energie Wasserstoff zu erzeugen.
-Ebenso gibt der spezifische Energiebedarf $E_spez$ ein wichtiger Effizient-Kennwert der
+\label{subs_bewkrit_effizienz}
+
+Zur Beurteilung der Effizienz einer Anlage werden insbesondere Systemwirkungsgrad \gls{eta_sys} und spezifischer Energiebedarf ????????????? genutzt.\\
+Das Kriterium der Effizienz eignet sich vorrangig zum Vergleich der betrachteten Technologien untereinander. Es kann ggf. Aufschluss über eine Eignung der entsprechenden Technologie für spezifische Betriebsarten liefern.
+
+\subsection{Effektivität}
+\label{subs_bewkrit_effektivitaet}
+
+Sofern der Einsatz einer \gls{el}-Anlage trotz der hier betrachteten, besonderen Betriebsbedingungen zur Bereitstellung einer bestimmten Menge der Produktgase erfolgt, ist zusätzlich zur Effizienz auch die Effektivität zu betrachten. Diese spiegelt sich maßgeblich in der erzeugten Menge der Produktgase ($m_{H_2}$, $m_{O_2}$)??????????? wider und ist in Bezug zur Anlagenskalierung zu setzen.\\
+Auch die Produktgasqualität (??????)spielt in diesem Punkt eine wichtige Rolle.
+
+\subsection{Systemdienlichkeit}%Systemdienstleistung}
+\label{subs_bewkrit_systemdienlichkeit}
+
+Nach Definition in Abschnitt(?????????? SystdienlichK) bedeutet Systemdienlichkeit im Kontext dieser Arbeit, einen Beitrag zum Last- und Erzeugungsausgleich des Stromnetzes zu leisten. Hierzu wird im Folgenden vorrangig der Nutzungsgrad $eta_N$ ????????????? herangezogen. Indirekt kann auch die tatsächliche Betriebszeit eines betrachteten Zeitraumes zusätzliche Anhaltspunkte liefern.\\
+
+
+Das systemdienliche Verhalten einer \gls{el}-technologie kann maßgeblich innerhalb der RESIDUAL-Betriebsart (RES) ???????????? überprüft werden. In Bezug auf einen EISMAN-Betrieb (EIS) soll in diesem Bezug geprüft werden, welche Menge der abgeregelten Energie potentiell zu nutzen ist.\\
+Ähnliches gilt für den WEA-Betrieb, wobei hier eine Aussage über die Höhe der nutzbaren Erzeugung und damit indirekt der verbleibenden Einspeisung möglich ist.\\
+Bezüglich der betrachteten COST-Betriebsart lässt das während des Betriebs vorliegende Kostenniveau zwar Rückschlüsse auf die entsprechende Netzsituation zu, jedoch ist deren Aussagekraft eingeschränkt (vgl. Abschnitt???????????).\\
+
+\subsection{Ökonomie}
+\label{sub_bewkrit_oekonomoie}
+
+Nach den zuvor aufgelisteten, vorrangig technischen Kenngrößen ist für einen sinnvollen Betrieb einer \gls{el}-Anlage ebenfalls die erzielbare Wirtschaftlichkeit von Relevanz.\\
+Anhand der spezifischen Wasserstoff-Produktionskosten $k_{H_2}$????????? ist zu überprüfen, od der produzierte Wasserstoff auf dem Markt Konkurrenzfähigkeit besitzt.
+
+%Wie aus \ref{sub_GrundET} hervorgeht, sind Elektrolyseur-Anlagen, wie in diesem Modell dargestellt, lediglich in der Lage  Systemdienleistung zu erbringen, indem sie das Netz durch Energieverbrauch entlasten. Die  Ausnutzungsrate $\eta_{util}$ beschreibt das Verhältnis der verrichteteten Arbeit der Elektrolyse-Anlage $W_{act}$ zur gesamten zur Verfügung stehenden elektrische Arbeit $W_{in}$.
+%Bei einem Verhältnis von 1 wäre die Anlage in der Lage,
+%\begin{itemize}
+%\item die gesamte aufgrund von Einspeisemanagement-Maßnahmen (\gls{eis}) geregelte Last vom Netz zu nehmen, Netzengpässe ideal zu verhindern und zudem die ungenutzte Erzeugung zu nutzen,
+%\item die gesamte negative Residuallast (\gls{res}) zu nutzen und im Sinne der Systemdienlichkeit das Netz ideal zu stabilisieren.
+%\end{itemize}
+%Je höher $\eta_{util}$ ausfällt, desto mehr Arbeit konnte die \gls{el}-Anlage verrichten und umso netzdienlicher ist der Anlagenbetrieb.
+%
+%\subsection{Effizienz}
+%Die Systemeffizienz $\eta_sys$ setzt die Energie des produzierten Wasserstoffs in Relation zur der Elektrolyse-Anlage zugeführten elektrischen Arbeit. Somit beschreibt der Kennwert die Effizienz der Elektrolyse-Anlage. %, aus elektrischer Energie Wasserstoff zu erzeugen.
+%Ebenso gibt der spezifische Energiebedarf $E_spez$ ein wichtiger Effizient-Kennwert der
 
 %\subsection{}
 %
@@ -2277,14 +2335,14 @@ In Abbildungen(\ref{fig:Strukt_Funkt_innerloopNT},\ref{fig:Strukt_Funkt_innerloo
 \begin{figure}[!tbp]
 	\centering
 	\begin{minipage}[t]{0.49\textwidth}
-		\includegraphics[width=\textwidth]{/home/dafu/Schreibtisch/Master-Projekt/Doku/Abb/Modell/inner_NT_13.png}
+		\includegraphics[width=\textwidth]{/home/dafu/Schreibtisch/Master-Projekt/Doku/Abb/Modell/inner_NT_23.png}
 		
 		\caption[Kern-Modell \gls{ht}-\gls{el}]{Struktur des dynamischen Kern-Modells der \gls{nt}-\gls{el}; Berechnungsablauf und Interdependenzen wichtiger Größen}
 		\label{fig:Strukt_Funkt_innerloopNT} 
 	\end{minipage}
 	\hfill
 	\begin{minipage}[t]{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Abb/Modell/inner_HT_13.png}
+		\includegraphics[width=\textwidth]{Abb/Modell/inner_HT_23.png}
 		
 		\caption[Kern-Modell \gls{ht}-\gls{el}]{Struktur des dynamischen Kern-Modells der \gls{ht}-\gls{el}; Berechnungsablauf und Interdependenzen wichtiger Größen}
 		\label{fig:Strukt_Funkt_innerloopHT}  
@@ -2368,8 +2426,10 @@ Dieser berechnet im Falle der Niedertemperatur-Elektrolyse den Kühlwassermassen
 	\includegraphics[width=1.0cm]{/home/dafu/Schreibtisch/Master-Projekt/Doku/Abb/Modell/it_Popt.png}
 	%\caption{Bildunterschrift}
 \end{wrapfigure} Die Berechnung des optimalen Anlagenstromes erfolgt an Hand einer build-in Optimierungsfunktion.
- Auf Grundlage der Polarisationskurve wird die optimale Stromdichte des Stacks in Abhängigkeit verfügbarer Leistung und unter Berücksichtigung des Peripherie-Leistungsbezugs ermittelt. Die zu Grunde liegende Optimierungsfunktion wird hier mittels \textsc{Methode kleinster Quadrate} durchgeführt.\\
+ Auf Grundlage der Polarisationskurve wird die optimale Stromdichte des Stacks in Abhängigkeit verfügbarer Leistung und unter Berücksichtigung des Peripherie-Leistungsbezugs ermittelt. Die zu Grunde liegende Optimierung wird hier mittels \textsc{Methode kleinster Quadrate} durchgeführt.\\
+\newline
 
+Innerhalb der \gls{nt}-Modelle ist eine Nachlaufzeit der Kühlwasserpumpe implementiert. Sinkt die Eingangsleistung auf Werte unterhalb der minimalen Anlagenleistung, 
 
 
 
@@ -2672,7 +2732,7 @@ Im folgenden Abschnitt werden Validierung der elektrochemischen Modelle, Auswahl
 
 \subsection{Technologiespezifische Parametrierung für Basis-Anlagengröße}
 \label{subs_Par_je_TEch}
-
+Für jede Betriebsart wird eine (möglichst optimal) Anlagengröße gewählt
 
 %Keine zeitlichen und infrastrukturellen Ressourcen für Experimente vorhanden.
 In Ermangelung von Versuchsaufbauten zur Bestimmung von bzw. dem fehlenden Zugriff auf Laborwerten ist lediglich eine Parametrisierung mittels Literaturangaben möglich. Durch eine entsprechende Notwendigkeit, Werte verschiedener Quellen und damit unterschiedlicher Skalierung bzw. Mess-Bedingungen zu verwenden, wird die Aussagekraft vorliegender Ergebnisse eingeschränkt. Einzelne Teilmodelle können häufig nur qualitativ überprüft bzw. verifiziert werden.\\
@@ -2716,7 +2776,7 @@ Für das Basis Modell der \gls{pem}-\gls{el} werden Parameter zu Zellfläche und
 \end{table}
 
 \begin{table}[]
-	\label{tab-param2}
+	\label{tab-param12}
 	\caption{Tabelle verwendeter Parameter}
 	\begin{tabular*}{\textwidth}{llllccccc}
 		% \multirow{ 2}{*}{\textbf{Quelle}}
@@ -2738,28 +2798,7 @@ Für das Basis Modell der \gls{pem}-\gls{el} werden Parameter zu Zellfläche und
 	\end{tabular*}
 \end{table}
 
-\subsection{Anlagenskalierung}
-\label{subs_Skal_TEch}
 
-\subsubsection{Anlagen Parameter}
-
-\begin{table}[]
-	\begin{tabular}{cllll}
-		&&AEL&PEM&SOEL\\
-		Betriebsart &Größe& &&\\
-		\hline \hline
-		\multirow{ 4}{*}{ \textbf{EIS}}&&&&\\
-		&hallo&&&\\
-		&hallo&&&\\
-		\multirow{ 4}{*}{ \textbf{RES}}&&&&\\
-		\multirow{ 4}{*}{ \textbf{WEA}}&&&&\\
-		\multirow{ 12}{*}{ \textbf{COST}}&&&&\\
-		&\multirow{ 4}{*}{ \textbf{s}}&&&\\
-		&&&&\\
-		&\multirow{ 4}{*}{ \textbf{m}}&&&\\
-		&\multirow{ 4}{*}{ \textbf{m}}&&&\\
-	\end{tabular}
-\end{table}
 
 \subsection{Funktionstest und Abgleich der Einzelkomponenten}
 \subsubsection{Elektrochemie}
@@ -3053,6 +3092,32 @@ zu beachten ist, dass der Schnittpunkt beider Kurven keine Aussage beinhaltet, s
 %	
 %	\end{tabular}
 %\end{table}
+\subsection{Technologiespezifische Skalierung}
+\label{subs_Skal_TEch}
+
+----TABELLE!!!!
+%\subsection{Anlagenskalierung}
+%
+%
+%\subsubsection{Anlagen Parameter}
+%
+%\begin{table}[]
+%	\begin{tabular}{cllll}
+%		&&AEL&PEM&SOEL\\
+%		Betriebsart &Größe& &&\\
+%		\hline \hline
+%		\multirow{ 4}{*}{ \textbf{EIS}}&&&&\\
+%		&hallo&&&\\
+%		&hallo&&&\\
+%		\multirow{ 4}{*}{ \textbf{RES}}&&&&\\
+%		\multirow{ 4}{*}{ \textbf{WEA}}&&&&\\
+%		\multirow{ 12}{*}{ \textbf{COST}}&&&&\\
+%		&\multirow{ 4}{*}{ \textbf{s}}&&&\\
+%		&&&&\\
+%		&\multirow{ 4}{*}{ \textbf{m}}&&&\\
+%		&\multirow{ 4}{*}{ \textbf{m}}&&&\\
+%	\end{tabular}
+%\end{table}
 
 \newpage
 \subsection{Simulationsdurchläufe und Plausibilitätsbetrachtung}
@@ -3135,6 +3200,8 @@ Abbildung(\ref{fig:ABGL_SKAL_EIS}) zeigt eine bezüglich der EISMAN-Betriebsart 
 	\label{fig:ABGL_SKAL_EIS} 
 \end{figure}
 Die tatsächlichen Anlagen-Leistungen entsprechen mit geringfügigen Abweichungen den Auslegungspunkten. Sämtliche Anlagen bewegen sich im Bereich prognostizierter Volllaststunden. Während \gls{ael} und \gls{pem}-\gls{el} die theoretisch nutzbare Energiemenge nur leicht unterschreiten, weicht die umgesetzte Energiemenge der \gls{soel} deutlich ab. 
+
+
 \newpage
 \subsubsection{RES}
 Bezüglich der RESIDUAL-Betriebsart zeigt Abbildung(\ref{fig:ABGL_SKAL_RES}) die um Markierungspunkte für genutzte Energiemenge und erreichte Volllaststunde ergänzte Abbildung(\ref{fig:Skal_RES}).\\
@@ -3719,77 +3786,77 @@ Unter Berücksichtigungen von Abweichungen und Vereinfachungen innerhalb der Mod
 		
 		\textbf{Anlagenspezifische Kennwerte}&&&&&&&& \\
 		Betriebsdruck 							& $p$ 					& $bar$ 			& 1,013		& 	 		& 1,013 				& 	 		& 1,013					& 	 		\\
-		Betriebstemperatur						& $T_{tar}$				& $\degree{C}$ 		& 77 		& \cite{Tjarks.2017}	& 60 					& Hammoudi	& 850 					& Ni 		\\[2ex]
-		maximale Temperatur						& $T_{max}$				& $\degree{C}$ 		& 85 		& \cite{Tjarks.2017}	& 80 					& Hammoudi	& 1050 					& Ni 		\\
-		minimale Temperatur						& $T_{min}$				& $\degree{C}$ 		& 20 		& \cite{Tjarks.2017}	& 20 					& Hammoudi	& 700 					& Ni 		\\
-		maximale Stromdichte 					& $i_{max}$ 			& $A/{cm^2}$ 		& 3.0 		& \cite{Tjarks.2017}	& 0.3 					& Hammoudi	& 0.8 					& Petipas 	\\
-		Zellen pro Stack						& $N_{ce_{st}}$			& -				 	& 200		& \cite{Tjarks.2017}		& 24					& Hammoudi 	& 400 					& Petipas 	\\
-		spez. Wärmekapazität					& $C_{t_{spec}}$		& $kJ/KN_{ce}$ 		& 1.2500	& \cite{Tjarks.2017}		& 4.8906 				& \cite{Ulleberg.2003}		& 0,0969				& Petipas 	\\
-		spez. Wärmedurchgangskoeffizient		& $H_{AX_{spec}}$		& $W/Kcm^{2}N_{ce}$				& 0.028		& Gabr					& 0,011 	& Gabr		& ??? 		& - 		\\
-		spez. Wärmedurchgangswiderstand			& $R_{t_{spec}}$		& $K/W$				& 0,167 	& \cite{Ulleberg.2003}		& 0,167					& \cite{Ulleberg.2003}		& 0,840					& Petipas 	\\
+		Betriebstemperatur						& $T_{tar}$				& $\degree{C}$ 		& 77 		& \cite{Tjarks.2017}	& 60 					& \cite{Hammoudi.2012}	& 850 					& Ni 		\\[2ex]
+		maximale Temperatur						& $T_{max}$				& $\degree{C}$ 		& 85 		& \cite{Tjarks.2017}	& 80 					& \cite{Hammoudi.2012}	& 1050 					& Ni 		\\
+		minimale Temperatur						& $T_{min}$				& $\degree{C}$ 		& 20 		& \cite{Tjarks.2017}	& 20 					& \cite{Hammoudi.2012}	& 700 					& Ni 		\\
+		maximale Stromdichte 					& $i_{max}$ 			& $A/{cm^2}$ 		& 3.0 		& \cite{Tjarks.2017}	& 0.3 					& \cite{Hammoudi.2012}	& 0.8 					& \cite{Petipas.2013} 	\\
+		Zellen pro Stack						& $N_{ce_{st}}$			& -				 	& 200		& \cite{Tjarks.2017}		& 24					& \cite{Hammoudi.2012} 	& 400 					& \cite{Petipas.2013} 	\\
+		spez. Wärmekapazität					& $C_{t_{spec}}$		& $kJ/KN_{ce}$ 		& 1.2500	& \cite{Tjarks.2017}		& 4.8906 				& \cite{Ulleberg.2003}		& 0,0969				& \cite{Petipas.2013} 	\\
+		spez. Wärmedurchgangskoeffizient		& $H_{AX_{spec}}$		& $W/Kcm^{2}N_{ce}$				& 0.028		& \cite{Gabrielli2016}					& 0,011 	& \cite{Gabrielli2016}		& ??? 		& - 		\\
+		spez. Wärmedurchgangswiderstand			& $R_{t_{spec}}$		& $K/W$				& 0,167 	& \cite{Ulleberg.2003}		& 0,167					& \cite{Ulleberg.2003}		& 0,840					& \cite{Petipas.2013} 	\\
 		Kühlwassereingangstemperatur			& $T_{cw_{in}}$			& $\degree{C}$ 		& 15 		& \cite{Ulleberg.2003}		& 15 					& \cite{Ulleberg.2003}		& 	 					& 	 		\\	
-		Degradationsgradient 					& $deg$ 				& ${\mu}V/h$		& 4-8 		& \cite{Buttler.2018}	& 1-2 					& Buttler	& 21 					& De-Niang 	\\
+		Degradationsgradient 					& $deg$ 				& ${\mu}V/h$		& 4-8 		& \cite{Buttler.2018}	& 1-2 					& \cite{Buttler.2018}	& 21 					& \cite{DeNiangThe.12.2015} 	\\
 		
 		&&&&&&&& \\
 		\textbf{Anoden-Kennwerte}&&&&&&&& \\
-		Elektrodenmaterial 						& - 					& -					& - 		& -	 		& - 					& Hammoudi	& - 					& -			\\
-		Elektrodenoberfläche 					& $A_{an}$				& $cm^{2}$			& 170 		& \cite{Gabrielli2016}	& 300					& Hammoudi 	& 100 					& Petipas 	\\
-		Elektrodendurchmesser 					& $\delta_{an}$			& $cm$ 				& 0,14 		& \cite{Chandesris2015} 	& 0,2 					& Hammoudi	& 0,05 					& Zhang 	\\
-		Seperatordistanz 						& $l_{an}$ 				& $cm$ 				& 	 		& 	 		& 0,125 				& Hammoudi	& 	 					& 			\\
+		Elektrodenmaterial 						& - 					& -					& - 		& -	 		& - 					& \cite{Hammoudi.2012}	& - 					& -			\\
+		Elektrodenoberfläche 					& $A_{an}$				& $cm^{2}$			& 170 		& \cite{Gabrielli2016}	& 300					& \cite{Hammoudi.2012} 	& 100 					& \cite{Petipas.2013} 	\\
+		Elektrodendurchmesser 					& $\delta_{an}$			& $cm$ 				& 0,14 		& \cite{Chandesris2015} 	& 0,2 					& \cite{Hammoudi.2012}	& 0,05 					& \cite{Zhang.2010} 	\\
+		Seperatordistanz 						& $l_{an}$ 				& $cm$ 				& 	 		& 	 		& 0,125 				& \cite{Hammoudi.2012}	& 	 					& 			\\
 		
-		Tortuosität 							& $\tau_{an}$			& - 				& 	 		& 	 		& 3,65 					& Abdin		& 6 					& Zhang 	\\
-		Porosität 								& $\epsilon_{an}$		& - 				& 	 		& 	 		& 0,30 					& Abdin		& 0,3 					& Zhang 	\\
-		Porenradius (Knudsen-Diff.) 			& $r_{P_{an}}$ 			& $cm$ 				& 	 		& 	 		& $1\times{10^{-4}}$	& Abdin		& $0,5\times{10^{-4}}$ 	& Zhang 	\\
+		Tortuosität 							& $\tau_{an}$			& - 				& 	 		& 	 		& 3,65 					& \cite{Abdin.2015}		& 6 					& \cite{Zhang.2010} 	\\
+		Porosität 								& $\epsilon_{an}$		& - 				& 	 		& 	 		& 0,30 					& \cite{Abdin.2015}		& 0,3 					& \cite{Zhang.2010} 	\\
+		Porenradius (Knudsen-Diff.) 			& $r_{P_{an}}$ 			& $cm$ 				& 	 		& 	 		& $1\times{10^{-4}}$	& \cite{Abdin.2015}		& $0,5\times{10^{-4}}$ 	& \cite{Zhang.2010}  	\\
 		Rugosität 								& $rug_{an}$			& $m^{2}/m^{2}$		& 150 		& \cite{Chandesris2015}	& 	 					& 			& 	 					& 	 		\\
-		Elektrodenrauheit 						& $\gamma_{an}$ 		& -	 				& 	 		& 	 		& 1,25 					& Abdin		&  						& 	 		\\
+		Elektrodenrauheit 						& $\gamma_{an}$ 		& -	 				& 	 		& 	 		& 1,25 					& \cite{Abdin.2015}		&  						& 	 		\\
 		
-		Ladungstransferkoeffizient 				& $\alpha_{an}$ 		& - 				& 0,65 		& \cite{Chandesris2015}	& 1,65 					& Abdin		& 	 					& 	 		\\
-		Freie Aktivierungsenergie 				& ${\Delta}G_{c_{an}}$	& $J/mol$ 			& 62836		& \cite{Chandesris2015}	& 80510 				& Abdin		& 120000 				& Zhang 	\\
-		Referenzaustauschstromdichte			& $i_{0ref_{an}}$		& $A/cm^{2}$ 		& 	 		& 	 		& $1\times{10^{-11}}$ 	& Abdin		& 	 					& 	 		\\
-		Referenztemperatur $i_{0ref_{an}}$ 		& $T_{ref_{an}}$ 		& $\degree{C}$	 	& 	 		& 	 		& 90 					& Abdin		& 	 					& 	 		\\	
-		Anodic rate parameter					& $k_{0_{an}}$			& $mol/Ksm^{2}$		& $4,63\times{10^{-3}}$ & Chande 				&& 	 		& 	 					& 	 		\\
+		Ladungstransferkoeffizient 				& $\alpha_{an}$ 		& - 				& 0,65 		& \cite{Chandesris2015}	& 1,65 					& \cite{Abdin.2015}		& 	 					& 	 		\\
+		Freie Aktivierungsenergie 				& ${\Delta}G_{c_{an}}$	& $J/mol$ 			& 62836		& \cite{Chandesris2015}	& 80510 				& \cite{Abdin.2015}		& 120000 				& \cite{Zhang.2010} 	\\
+		Referenzaustauschstromdichte			& $i_{0ref_{an}}$		& $A/cm^{2}$ 		& 	 		& 	 		& $1\times{10^{-11}}$ 	& \cite{Abdin.2015}		& 	 					& 	 		\\
+		Referenztemperatur $i_{0ref_{an}}$ 		& $T_{ref_{an}}$ 		& $\degree{C}$	 	& 	 		& 	 		& 90 					& \cite{Abdin.2015}		& 	 					& 	 		\\	
+		Anodic rate parameter					& $k_{0_{an}}$			& $mol/Ksm^{2}$		& $4,63\times{10^{-3}}$ & \cite{Chandesris2015} 				&& 	 		& 	 					& 	 		\\
 		Elektrodenleitfähigkeit					& $\sigma_{an}$ 		& $S/m$				& 13700	 	& \cite{Chandesris2015} 	& 						& 	 		& 	 					& 	 		\\
 		
 		&&&&&&&& \\
 		\textbf{Kathoden-Kennwerte}&&&&&&&& \\
-		Elektrodenmaterial 						& - 					& - 				& - 		& - 		& -		 				& Hammoudi 	& - 					& - 		\\
-		Elektrodenoberfläche 					& $A_{ca}$ 				& $cm^{2}$ 			& 170 		& \cite{Gabrielli2016}	& 300 					& Hammoudi 	& 100 					& Petipas	\\
-		Elektrodendurchmesser 					& $\delta_{ca}$ 		& $cm$ 				& 0,235		& \cite{Chandesris2015}	& 0,2 					& Hammoudi 	& 0,5 					& Zhang 	\\
-		Seperatordistanz 						& $l_{ca}$ 				& $cm$ 				& 	 		& 	 		& 0,125 				& Hammoudi 	& 	 					& 	 		\\
+		Elektrodenmaterial 						& - 					& - 				& - 		& - 		& -		 				& \cite{Hammoudi.2012} 	& - 					& - 		\\
+		Elektrodenoberfläche 					& $A_{ca}$ 				& $cm^{2}$ 			& 170 		& \cite{Gabrielli2016}	& 300 					& \cite{Hammoudi.2012} 	& 100 					& \cite{Petipas.2013}	\\
+		Elektrodendurchmesser 					& $\delta_{ca}$ 		& $cm$ 				& 0,235		& \cite{Chandesris2015}	& 0,2 					& \cite{Hammoudi.2012} 	& 0,5 					& \cite{Zhang.2010} 	\\
+		Seperatordistanz 						& $l_{ca}$ 				& $cm$ 				& 	 		& 	 		& 0,125 				& \cite{Hammoudi.2012} 	& 	 					& 	 		\\
 		
-		Tortuosität 							& $\tau_{ca}$	 		& -	 				& 	 		& 			& 3,65 					& Abdin 	& 6 					& Zhang 	\\
-		Porosität 								& $\epsilon_{ca}$		& -	 				& 	 		& 			& 0,30 					& Abdin 	& 0,3 					& Zhang 	\\
-		Porenradius (Knudsen-Diff.) 			& $r_{P_{ca}}$			& $cm$ 				& 	 		& 	 		& $1\times{10^{-4}}$	& Abdin 	& $0,5\times{10^{-4}}$ 	& Zhang 	\\
+		Tortuosität 							& $\tau_{ca}$	 		& -	 				& 	 		& 			& 3,65 					& \cite{Abdin.2015} 	& 6 					& \cite{Zhang.2010}  	\\
+		Porosität 								& $\epsilon_{ca}$		& -	 				& 	 		& 			& 0,30 					& \cite{Abdin.2015} 	& 0,3 					& \cite{Zhang.2010}  	\\
+		Porenradius (Knudsen-Diff.) 			& $r_{P_{ca}}$			& $cm$ 				& 	 		& 	 		& $1\times{10^{-4}}$	& \cite{Abdin.2015} 	& $0,5\times{10^{-4}}$ 	& \cite{Zhang.2010}  	\\
 		Rugosität 								& $rug_{ca}$			& $m^{2}/m^{2}$		& 150 		& \cite{Chandesris2015}	& 	 					& 		 	& 	 					&	 		\\
-		Elektrodenrauheit 						& $\gamma_{ca}$ 		& 	 				& 	 		& 	 		& 1,05 					& Abdin 	& 	 					& 	 		\\
+		Elektrodenrauheit 						& $\gamma_{ca}$ 		& 	 				& 	 		& 	 		& 1,05 					& \cite{Abdin.2015} 	& 	 					& 	 		\\
 		
-		Ladungstransferkoeffizient 				& $\alpha_{ca}$ 		& - 				& 0,51 		& \cite{Chandesris2015}	& 0,73 					& Abdin 	& 	 					& 	 		\\
-		Freie Aktivierungsenergie 				& ${\Delta}G_{c_{ca}}$ 	& $J/mol$		    & 24359		& \cite{Chandesris2015}	& 80510 				& Abdin 	& 100000 				& Zhang 	\\
-		Referenzaustauschstromdichte			& $i_{0ref_{ca}}$ 		& $A/cm^{2}$		& 	 		& 	 		& $1\times{10^{-3}}$ 	& Abdin 	& 	 					& 	 		\\
-		Referenztemperatur $i_{0ref_{ca}}$ 		& $T_{ref_{ca}}$ 		& $\degree{C}$	 	& 	 		& 	 		& 90 					& Abdin 	& 	 					& 	 		\\
-		Cathodic rate parameter					& $k_{0_{ca}}$			& $mol/Ksm^{2}$		& $1,10\times{10^{-3}}$ & Chande 				&&			& 						& 	 		\\
+		Ladungstransferkoeffizient 				& $\alpha_{ca}$ 		& - 				& 0,51 		& \cite{Chandesris2015}	& 0,73 					& \cite{Abdin.2015} 	& 	 					& 	 		\\
+		Freie Aktivierungsenergie 				& ${\Delta}G_{c_{ca}}$ 	& $J/mol$		    & 24359		& \cite{Chandesris2015}	& 80510 				& \cite{Abdin.2015} 	& 100000 				& \cite{Zhang.2010} 	\\
+		Referenzaustauschstromdichte			& $i_{0ref_{ca}}$ 		& $A/cm^{2}$		& 	 		& 	 		& $1\times{10^{-3}}$ 	& \cite{Abdin.2015} 	& 	 					& 	 		\\
+		Referenztemperatur $i_{0ref_{ca}}$ 		& $T_{ref_{ca}}$ 		& $\degree{C}$	 	& 	 		& 	 		& 90 					& \cite{Abdin.2015} 	& 	 					& 	 		\\
+		Cathodic rate parameter					& $k_{0_{ca}}$			& $mol/Ksm^{2}$		& $1,10\times{10^{-3}}$ & \cite{Chandesris2015} 				&&			& 						& 	 		\\
 		Elektrodenleitfähigkeit					& $\sigma_{ca}$ 		& $S/m$				& 46	 	& \cite{Chandesris2015}	& 	 					&  			& 	 					& 	 		\\
 		
 		&&&&&&&& \\
 		\textbf{Diaphragma-Kennwerte}&&&&&&&& \\
-		Oberfläche 								& $A_{dia}$ 			& $cm^{2}$ 			&&& 300 	& Abdin		&&\\
-		Durchmesser 							& $\delta_{dia}$ 		& $\mu{m}$ 			&&& 320 	& Abdin		&&\\
-		Tortuosität 							& $\tau{dia}$			& - 				&&& 3,65 	& Abdin		&&\\
-		Porosität 								& $\epsilon_{dia}$ 		& - 				&&& 0,30 	& Abdin		&&\\
-		Wettability 							& $\omega_{dia}$ 		& - 				&&& 0,85 	& Abdin		&&\\
-		Spezifische Resistivität 				& $\rho_{dia}$ 			& ${\Omega}/cm$ 	&&& 1,5 	& Perl Zirf &&\\
+		Oberfläche 								& $A_{dia}$ 			& $cm^{2}$ 			&&& 300 	& \cite{Abdin.2015} 		&&\\
+		Durchmesser 							& $\delta_{dia}$ 		& $\mu{m}$ 			&&& 320 	& \cite{Abdin.2015} 		&&\\
+		Tortuosität 							& $\tau{dia}$			& - 				&&& 3,65 	& \cite{Abdin.2015} 		&&\\
+		Porosität 								& $\epsilon_{dia}$ 		& - 				&&& 0,30 	& \cite{Abdin.2015} 		&&\\
+		Wettability 							& $\omega_{dia}$ 		& - 				&&& 0,85 	& \cite{Abdin.2015} 		&&\\
+		Spezifische Resistivität 				& $\rho_{dia}$ 			& ${\Omega}/cm$ 	&&& 1,5 	& Perl ??? Zirf &&\\
 		
 		&&&&&&&& \\
 		\textbf{Elektrolyt-Kennwerte}&&&&&&&& \\
-		Durchmesser								& $\delta_{mem}$		& $\mu{m}$			& 200		& \cite{Gabrielli2016}	&			&			& 500   & Zhang \\			
+		Durchmesser								& $\delta_{mem}$		& $\mu{m}$			& 200		& \cite{Gabrielli2016}	&			&			& 500   & \cite{Zhang.2010} \\			
 		Membranfeuchtigkeit						& $\lambda_{mem}$		& -					& 16  		& \cite{Chandesris2015}	& 			& 			& 		& 		\\
 		Membranwiderstand						& $R_{mem}$ 			& $\Omega$			& 0.096		& \cite{Tjarks.2017}	& 	 		& 			& 	 	& 		\\
-		Diff. Permeabilität $O_{2}$				& $\epsilon_{O_{2}}$	& $mol/cmsbar$		& $2,00\times{10^{-11}}$	& Schalenbach			&			&						&	 \\
-		Diff. Permeabilität $H_{2}$				& $\epsilon_{H_{2}}$	& $mol/cmsbar$		& $4,65\times{10^{-11}}$	& Schalenbach			&			&						&	 \\
+		Diff. Permeabilität $O_{2}$				& $\epsilon_{O_{2}}$	& $mol/cmsbar$		& $2,00\times{10^{-11}}$	& \cite{Schalenbach2013}			&			&						&	 \\
+		Diff. Permeabilität $H_{2}$				& $\epsilon_{H_{2}}$	& $mol/cmsbar$		& $4,65\times{10^{-11}}$	& \cite{Schalenbach2013}			&			&						&	 \\
 		
 		&&&&&&&& \\
-		KOH-Konzentration 						& - 					& $wt\%$ 			&			&			& 30 		& Henao		&		& 		\\
-		KOH-Volumenstrom pro Stack 				& $V_{KOH}$ 			& $l/min$ 			&			&			& 0.5 		& Henao		&		& 		\\
+		KOH-Konzentration 						& - 					& $wt\%$ 			&			&			& 30 		& \cite{Henao.2014}		&		& 		\\
+		KOH-Volumenstrom pro Stack 				& $V_{KOH}$ 			& $l/min$ 			&			&			& 0.5 		& \cite{Henao.2014}		&		& 		\\
 		
 		
 		
